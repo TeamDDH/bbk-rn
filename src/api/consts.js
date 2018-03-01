@@ -1,6 +1,6 @@
-export const urlPrefix = 'http://localhost:5000/v1/'
-
+export const urlPrefix = 'http://118.25.19.113/v1/'
 export const urlPrefixArticle = urlPrefix + 'article'
-export const urlPrefixLogin = urlPrefix + 'connection'
+export const urlPrefixLogin = urlPrefix + 'auth'
 export const urlPrefixTopic = urlPrefix + 'topic'
 export const urlPrefixRegister = urlPrefix + 'user'
+export const urlPrefixComment = urlPrefix + 'comment'

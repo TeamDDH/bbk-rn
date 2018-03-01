@@ -1,5 +1,3 @@
-// @flow
-
 import { urlPrefixLogin, urlPrefixRegister } from './consts'
 
 const headers = {
@@ -26,5 +24,5 @@ export const register = function(username: string, password: string) {
       username,
       password
     })
-  }).then(response => response.json())
+  })
 }

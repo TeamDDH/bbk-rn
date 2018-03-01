@@ -1,30 +1,41 @@
-import { StackNavigator, TabNavigator } from 'react-navigation'
-import HomeView from './views/Home'
-import WatchView from './views/Watch'
-import MeView from './views/Me'
-import ArticleDetail from './views/ArticleDetail'
-import TopicDetail from './views/TopicDetail'
-import Auth from './views/Auth'
-import CollectedArticles from './views/CollectedArticles'
-import FollowedTopics from './views/FollowedTopics'
-import Settings from './views/Settings'
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
+import HomeView from './pages/Home'
+import WatchView from './pages/Watch'
+import MeView from './pages/Me'
+import ArticleDetail from './pages/ArticleDetail'
+import TopicDetail from './pages/TopicDetail'
+import Auth from './pages/Auth'
+import CollectedArticles from './pages/CollectedArticles'
+import FollowedTopics from './pages/FollowedTopics'
+import Settings from './pages/Settings'
+import Profile from './pages/Profile'
 
 export default StackNavigator(
   {
     Main: {
       screen: StackNavigator({
         MainTab: {
-          screen: TabNavigator({
-            Main: { screen: HomeView },
-            Watch: { screen: WatchView },
-            Me: { screen: MeView }
-          })
+          screen: TabNavigator(
+            {
+              Main: { screen: HomeView },
+              Watch: { screen: WatchView },
+              Me: { screen: MeView }
+            },
+            {
+              tabBarComponent: TabBarBottom,
+              tabBarPosition: 'bottom',
+              animationEnabled: false,
+              swipeEnabled: false,
+              initialRouteName: 'Me'
+            }
+          )
         },
         ArticleDetail: { screen: ArticleDetail },
         TopicDetail: { screen: TopicDetail },
         CollectedArticles: { screen: CollectedArticles },
         FollowedTopics: { screen: FollowedTopics },
-        Settings: { screen: Settings }
+        Settings: { screen: Settings },
+        Profile: { screen: Profile }
       })
     },
     AuthModal: { screen: Auth }
@@ -32,6 +43,6 @@ export default StackNavigator(
   {
     mode: 'modal',
     headerMode: 'none',
-    initialRouteName: 'Main'
+    initialRouteName: 'AuthModal'
   }
 )

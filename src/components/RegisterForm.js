@@ -1,6 +1,11 @@
 import React from 'react'
-import { TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { withFormik } from 'formik'
+import {
+  topInputStyle,
+  middleInputStyle,
+  bottomInputStyle
+} from '../assets/styles/mixins'
 
 import PlainButton from '../components/PlainButton'
 
@@ -13,48 +18,40 @@ const RegisterForm = props => (
     <TextInput
       onChangeText={text => props.setFieldValue('username', text)}
       value={props.values.username}
-      style={{
-        borderRadius: 4,
-        borderColor: '#e3e3e3',
-        borderWidth: 1,
-        borderBottomWidth: 0,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
-        height: 44,
-        fontSize: 20,
-        paddingHorizontal: 4
-      }}
+      style={topInputStyle}
+      clearButtonMode={'while-editing'}
+      autoCorrect={false}
+      autoCapitalize={'none'}
+      placeholder={'用户名'}
     />
     <TextInput
       onChangeText={text => props.setFieldValue('password', text)}
       value={props.values.password}
-      style={{
-        borderRadius: 0,
-        borderColor: '#e3e3e3',
-        borderWidth: 1,
-        borderBottomWidth: 0,
-        height: 44,
-        fontSize: 20,
-        paddingHorizontal: 4
-      }}
+      style={middleInputStyle}
+      secureTextEntry={true}
+      clearButtonMode={'while-editing'}
+      clearTextOnFocus={true}
+      placeholder={'密码'}
     />
     <TextInput
       onChangeText={text => props.setFieldValue('repeat', text)}
       value={props.values.repeat}
-      style={{
-        borderRadius: 4,
-        borderColor: '#e3e3e3',
-        borderWidth: 1,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        height: 44,
-        fontSize: 20,
-        paddingHorizontal: 4,
-        marginBottom: 8
-      }}
+      style={bottomInputStyle}
+      secureTextEntry={true}
+      clearButtonMode={'while-editing'}
+      clearTextOnFocus={true}
+      placeholder={'重复密码'}
     />
-    <PlainButton onPress={props.handleSubmit} title={'注册'} />
+    <View style={styles.plainButtonWrapper}>
+      <PlainButton onPress={props.handleSubmit} title={'注册'} />
+    </View>
   </View>
 )
+
+const styles = StyleSheet.create({
+  plainButtonWrapper: {
+    marginVertical: 8
+  }
+})
 
 export default enhancer(RegisterForm)

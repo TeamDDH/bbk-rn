@@ -5,11 +5,21 @@ import LoginForm from '../components/LoginForm'
 import RegisterFrom from '../components/RegisterForm'
 
 class Auth extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { isLoginMode: true }
+  }
+
+  toggleMode = () => {
+    this.setState({ isLoginMode: !this.state.isLoginMode })
+  }
+
   handleLoginSubmit = () => {}
   handleRegisterSubmit = () => {}
 
   render() {
-    const { isLoginMode, user } = this.props
+    const { user } = this.props
+    const { isLoginMode } = this.state
 
     return (
       <View style={styles.container}>
@@ -22,12 +32,14 @@ class Auth extends React.Component {
           )}
         </View>
         <View style={styles.footer}>
-          <Text>{isLoginMode ? '还没有账号？' : '已经拥有账号了吗？'}</Text>
-          {/* <Button
+          <Text style={styles.footerText}>
+            {isLoginMode ? '还没有账号' : '已经拥有账号'}
+          </Text>
+          <Button
             onPress={this.toggleMode}
             style={styles.footerLink}
             title={isLoginMode ? '点击这里注册' : '点击这里登录'}
-          /> */}
+          />
         </View>
       </View>
     )
@@ -51,9 +63,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     height: 44,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 44
+    marginBottom: 120
+  },
+  footerText: {
+    fontSize: 18,
+    textAlign: 'center'
   },
   footerLink: {
     fontSize: 12
@@ -62,7 +76,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    isLoginMode: true,
     user: state.user
   }
 }
