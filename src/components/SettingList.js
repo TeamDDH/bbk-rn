@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   StyleSheet,
   View,
@@ -7,39 +8,29 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-const styles = StyleSheet.create({
-  cell: {
-    height: 44,
-    backgroundColor: '#f6f6f6',
-    paddingHorizontal: 20
-  },
-  avatarCell: {
-    height: 120,
-    backgroundColor: '#f6f6f6',
-    paddingHorizontal: 20
-  },
-  cellContent: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  avatarCellTitle: {
-    fontSize: 22
-  },
-  avatarCellDesc: {
-    fontSize: 14,
-    color: '#9d9d9d'
-  },
-  cellTitle: {
-    fontSize: 16
-  },
-  sectionHeader: {
-    padding: 16,
-    paddingBottom: 8
-  },
-  sectionHeaderTitle: {
-    color: '#9d9d9d'
+class Avatar extends React.PureComponent {
+  render() {
+    const { onPress, isAuth, user } = this.props
+
+    return (
+      <TouchableOpacity onPress={onPress} style={styles.avatarCell}>
+        <View style={styles.cellContent}>
+          <Text style={styles.avatarCellTitle}>
+            {isAuth ? user.username : '你尚未登录'}
+          </Text>
+          {isAuth ? null : (
+            <Text style={styles.avatarCellDesc}>登录或注册</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+    )
   }
-})
+}
+
+const AvatarCell = connect(state => ({
+  isAuth: !!state.authInfo.token,
+  user: state.authInfo.user
+}))(Avatar)
 
 class SettingListCell extends React.PureComponent {
   _onPress = () => {
@@ -51,14 +42,7 @@ class SettingListCell extends React.PureComponent {
 
     switch (type) {
       case 'avatar':
-        return (
-          <TouchableOpacity onPress={this._onPress} style={styles.avatarCell}>
-            <View style={styles.cellContent}>
-              <Text style={styles.avatarCellTitle}>{title}</Text>
-              <Text style={styles.avatarCellDesc}>{desc}</Text>
-            </View>
-          </TouchableOpacity>
-        )
+        return <AvatarCell onPress={this._onPress} />
       default:
         return (
           <TouchableOpacity onPress={this._onPress} style={styles.cell}>
@@ -117,3 +101,37 @@ export default class SettingList extends React.PureComponent {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  cell: {
+    height: 44,
+    backgroundColor: '#f6f6f6',
+    paddingHorizontal: 20
+  },
+  avatarCell: {
+    height: 120,
+    backgroundColor: '#f6f6f6',
+    paddingHorizontal: 20
+  },
+  cellContent: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  avatarCellTitle: {
+    fontSize: 22
+  },
+  avatarCellDesc: {
+    fontSize: 14,
+    color: '#9d9d9d'
+  },
+  cellTitle: {
+    fontSize: 16
+  },
+  sectionHeader: {
+    padding: 16,
+    paddingBottom: 8
+  },
+  sectionHeaderTitle: {
+    color: '#9d9d9d'
+  }
+})

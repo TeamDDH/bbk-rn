@@ -1,24 +1,37 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { connect } from 'react-redux'
+import { persist } from '../store'
 import LoginForm from '../components/LoginForm'
 import RegisterFrom from '../components/RegisterForm'
 
 class Auth extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { isLoginMode: true }
+    this.state = {
+      isLoginMode: true
+    }
   }
 
   toggleMode = () => {
     this.setState({ isLoginMode: !this.state.isLoginMode })
   }
 
-  handleLoginSubmit = () => {}
-  handleRegisterSubmit = () => {}
+  handleAuthSuccess = ({ expire, token, user }) => {
+    this.props.setUser(user)
+    this.props.setToken(token)
+    this.props.navigation.goBack(null)
+
+    persist.save({
+      key: 'authInfo',
+      data: {
+        user,
+        token
+      }
+    })
+  }
 
   render() {
-    const { user } = this.props
     const { isLoginMode } = this.state
 
     return (
@@ -26,9 +39,9 @@ class Auth extends React.Component {
         <View style={styles.main}>
           <Text style={styles.headerText}>{isLoginMode ? '登录' : '注册'}</Text>
           {isLoginMode ? (
-            <LoginForm handleOnSubmit={this.handleLoginSubmit} />
+            <LoginForm handleSuccess={this.handleAuthSuccess} />
           ) : (
-            <RegisterFrom handleOnSubmit={this.handleRegisterSubmit} />
+            <RegisterFrom handleSuccess={this.handleAuthSuccess} />
           )}
         </View>
         <View style={styles.footer}>
@@ -74,13 +87,19 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps(state) {
-  return {
-    user: state.user
-  }
-}
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = function(state) {
   return {}
+}
+
+const mapDispatchToProps = function(dispatch) {
+  return {
+    setUser: user => {
+      dispatch({ type: 'SET_USER', user })
+    },
+    setToken: token => {
+      dispatch({ type: 'SET_TOKEN', token })
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth)

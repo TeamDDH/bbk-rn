@@ -1,4 +1,4 @@
-export const find = function(key: string, array: Array, value: Array) {
+export const find = function(key, array, value) {
   if (value === null || value === undefined) return null
   let ret
   array.forEach(element => {
@@ -9,4 +9,4 @@ export const find = function(key: string, array: Array, value: Array) {
   return ret
 }
 
-export const merge = function(key: string, preArray, postArray) {}
+export const merge = function(key, preArray, postArray) {}

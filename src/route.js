@@ -13,36 +13,42 @@ import Profile from './pages/Profile'
 export default StackNavigator(
   {
     Main: {
-      screen: StackNavigator({
-        MainTab: {
-          screen: TabNavigator(
-            {
-              Main: { screen: HomeView },
-              Watch: { screen: WatchView },
-              Me: { screen: MeView }
-            },
-            {
-              tabBarComponent: TabBarBottom,
-              tabBarPosition: 'bottom',
-              animationEnabled: false,
-              swipeEnabled: false,
-              initialRouteName: 'Me'
-            }
-          )
+      screen: StackNavigator(
+        {
+          MainTab: {
+            screen: TabNavigator(
+              {
+                Main: { screen: HomeView },
+                Watch: { screen: WatchView },
+                Me: { screen: MeView }
+              },
+              {
+                tabBarComponent: TabBarBottom,
+                tabBarPosition: 'bottom',
+                animationEnabled: false,
+                swipeEnabled: false,
+                initialRouteName: 'Me'
+              }
+            )
+          },
+          ArticleDetail: { screen: ArticleDetail },
+          TopicDetail: { screen: TopicDetail },
+          CollectedArticles: { screen: CollectedArticles },
+          FollowedTopics: { screen: FollowedTopics },
+          Settings: { screen: Settings },
+          Profile: { screen: Profile }
         },
-        ArticleDetail: { screen: ArticleDetail },
-        TopicDetail: { screen: TopicDetail },
-        CollectedArticles: { screen: CollectedArticles },
-        FollowedTopics: { screen: FollowedTopics },
-        Settings: { screen: Settings },
-        Profile: { screen: Profile }
-      })
+        {
+          navigationOpetions: {
+            elevation: 0
+          }
+        }
+      )
     },
     AuthModal: { screen: Auth }
   },
   {
     mode: 'modal',
-    headerMode: 'none',
-    initialRouteName: 'AuthModal'
+    headerMode: 'none'
   }
 )

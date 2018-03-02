@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux'
 import * as actionTypes from './actionTypes'
 
-const user = function(state = {}, action) {
+const authInfo = function(state = {}, action) {
   switch (action.type) {
     case actionTypes.SET_USER:
-      return action.user
+      return { ...state, user: action.user }
     case actionTypes.SET_TOKEN:
-      return Object.assign({}, state, { token: action.token })
-    case actionTypes.SET_USERNAME:
-      return Object.assign({}, state, { username: action.username })
+      return { ...state, token: action.token }
+    case actionTypes.UN_AUTH:
+      return {}
     default:
       return state
   }
@@ -33,7 +33,7 @@ const articles = (state = [], action) => {
 }
 
 export default combineReducers({
-  user,
+  authInfo,
   topics,
   articles
 })

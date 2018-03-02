@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { fetchNewTopicsInPage } from '../api/topics'
-import { find } from '../utils/array'
+import { container } from '../assets/styles/mixins'
 import TopicList from '../components/TopicList'
 import { Topic } from '../models'
+import { find } from '../utils/array'
 
 export default class Main extends React.Component<{}> {
   constructor(props: Object) {
@@ -74,7 +75,7 @@ export default class Main extends React.Component<{}> {
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <View style={container}>
         <TopicList
           topics={this.state.topics}
           selectTopic={this._selectTopic}
@@ -85,9 +86,3 @@ export default class Main extends React.Component<{}> {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1
-  }
-})

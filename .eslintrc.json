@@ -24,6 +24,8 @@
   "globals": {
     "window": true,
     "fetch": true,
+    "console": true,
+    "Promise": true,
     "__DEV__": true,
     "__APP__": true,
     "__ANDROID__": true,

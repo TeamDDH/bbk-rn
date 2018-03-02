@@ -1,5 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
+import { persist } from '../store'
 import SettingList from '../components/SettingList'
 
 const sections = [
@@ -7,19 +9,24 @@ const sections = [
     data: [
       {
         title: '退出登录',
-        type: 'cell'
+        type: 'cell',
+        hook: 'quit'
       }
-    ],
-    title: ' '
+    ]
   }
 ]
 
-export default class Settings extends React.PureComponent {
+class Settings extends React.PureComponent {
   static navigationOptions = {
     title: '设置'
   }
 
-  _onPressItem = navigation => {}
+  _onPressItem = hook => {
+    if (hook === 'quit') {
+      this.props.unAuth()
+      this.props.navigation.goBack(null)
+    }
+  }
 
   render() {
     return (
@@ -29,3 +36,14 @@ export default class Settings extends React.PureComponent {
     )
   }
 }
+
+const mapDispatchToProps = function(dispatch) {
+  return {
+    unAuth: () => {
+      dispatch({ type: 'UN_AUTH' })
+      persist.remove({ key: 'authInfo' })
+    }
+  }
+}
+
+export default connect(() => ({}), mapDispatchToProps)(Settings)

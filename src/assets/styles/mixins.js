@@ -26,3 +26,13 @@ export const bottomInputStyle = {
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0
 }
+
+export const container = {
+  flex: 1
+}
+
+export const centeredContainer = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center'
+}

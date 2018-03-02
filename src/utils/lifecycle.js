@@ -1,16 +1,16 @@
-/**
- * @flow
- * Methods that would be triggered during the app's life cycle.
- */
-
-// import { getUserInfo } from '../store'
-
-export const prepareUserInfo = function() {
-  // getUserInfo().then(userInfo => {
-  //   if (userInfo === null) return
-  // })
-}
+import { persist, store } from '../store'
+import * as actions from '../store/actions'
 
 export const appDidMount = function() {
-  prepareUserInfo()
+  prepareAuthInfo()
+}
+
+const prepareAuthInfo = function() {
+  persist
+    .load({ key: 'authInfo' })
+    .then(authInfo => {
+      store.dispatch(actions.setUser(authInfo.user))
+      store.dispatch(actions.setToken(authInfo.token))
+    })
+    .catch(err => console.log(err.name))
 }

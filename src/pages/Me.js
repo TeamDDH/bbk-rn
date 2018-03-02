@@ -3,16 +3,14 @@ import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import SettingList from '../components/SettingList'
 
-const avatarCell = {
-  title: 'Avatar',
-  desc: 'Avatar & Cell',
-  type: 'avatar',
-  hook: 'Avatar'
-}
-
 const sections = [
   {
-    data: [avatarCell]
+    data: [
+      {
+        type: 'avatar',
+        hook: 'Avatar'
+      }
+    ]
   },
   {
     data: [
@@ -62,18 +60,7 @@ class Me extends React.Component {
     }
   }
 
-  _onPressSettingsItem = navigation => {}
-
   render() {
-    const { isAuth, user } = this.props
-    if (isAuth) {
-      avatarCell.hasUser = true
-      avatarCell.user = user
-    } else {
-      avatarCell.hasUser = false
-      avatarCell.user = null
-    }
-
     return (
       <View style={styles.wrapper}>
         <SettingList onPressItem={this._onPressItem} sections={sections} />
@@ -83,8 +70,8 @@ class Me extends React.Component {
 }
 
 export default connect(state => ({
-  isAuth: !!state.user.token,
-  user: state.user
+  isAuth: !!state.authInfo.token,
+  user: state.authInfo.user
 }))(Me)
 
 const styles = StyleSheet.create({

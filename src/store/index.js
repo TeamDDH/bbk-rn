@@ -1,13 +1,17 @@
+import Storage from 'react-native-storage'
+import { AsyncStorage } from 'react-native'
 import { createStore } from 'redux'
 import reducers from './reducers'
 
-const generateInitState = () => ({
-  user: {
-    username: '',
-    token: ''
-  },
-  topics: [],
-  articles: []
-})
+// State
+export const store = createStore(reducers)
 
-export const store = createStore(reducers, generateInitState())
+// Persist
+const ONE_WEEK = 1000 * 3600 * 24 * 7
+
+export const persist = new Storage({
+  size: 1000,
+  storageBackend: AsyncStorage,
+  defaultExpires: ONE_WEEK,
+  enableCache: true
+})

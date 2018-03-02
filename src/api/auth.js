@@ -5,24 +5,13 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-export const login = function(username: string, password: string) {
-  return fetch(urlPrefixLogin, {
+export const authUser = function(type, params) {
+  const url = type === 'login' ? urlPrefixLogin : urlPrefixRegister
+  return fetch(url, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      username,
-      password
-    })
-  }).then(response => response.json())
-}
-
-export const register = function(username: string, password: string) {
-  return fetch(urlPrefixRegister, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      username,
-      password
-    })
+    body: JSON.stringify(params)
   })
+    .then(response => response.json())
+    .then(res => (res.message ? Promise.reject(res.message) : res))
 }
