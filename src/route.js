@@ -13,37 +13,29 @@ import Profile from './pages/Profile'
 export default StackNavigator(
   {
     Main: {
-      screen: StackNavigator(
-        {
-          MainTab: {
-            screen: TabNavigator(
-              {
-                Main: { screen: HomeView },
-                Watch: { screen: WatchView },
-                Me: { screen: MeView }
-              },
-              {
-                tabBarComponent: TabBarBottom,
-                tabBarPosition: 'bottom',
-                animationEnabled: false,
-                swipeEnabled: false,
-                initialRouteName: 'Me'
-              }
-            )
-          },
-          ArticleDetail: { screen: ArticleDetail },
-          TopicDetail: { screen: TopicDetail },
-          CollectedArticles: { screen: CollectedArticles },
-          FollowedTopics: { screen: FollowedTopics },
-          Settings: { screen: Settings },
-          Profile: { screen: Profile }
+      screen: StackNavigator({
+        MainTab: {
+          screen: TabNavigator(
+            {
+              Main: { screen: HomeView },
+              Watch: { screen: WatchView },
+              Me: { screen: MeView }
+            },
+            {
+              tabBarComponent: TabBarBottom,
+              tabBarPosition: 'bottom',
+              animationEnabled: false,
+              swipeEnabled: false
+            }
+          )
         },
-        {
-          navigationOpetions: {
-            elevation: 0
-          }
-        }
-      )
+        ArticleDetail: { screen: ArticleDetail },
+        TopicDetail: { screen: TopicDetail },
+        CollectedArticles: { screen: CollectedArticles },
+        FollowedTopics: { screen: FollowedTopics },
+        Settings: { screen: Settings },
+        Profile: { screen: Profile }
+      })
     },
     AuthModal: { screen: Auth }
   },

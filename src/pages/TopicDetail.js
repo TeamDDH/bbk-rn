@@ -6,13 +6,6 @@ import { find } from '../utils/array'
 
 import ArticleList from '../components/ArticleList'
 
-/**
- * TopicDetail is a list of articles belong to this topic.
- *
- * @export
- * @class TopicDetail
- * @extends {React.Component}
- */
 export default class TopicDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
