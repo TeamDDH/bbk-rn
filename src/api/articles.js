@@ -3,17 +3,23 @@ import { Article } from '../models'
 
 export const fetchArticlesInTopic = function(topicId, pageNumber) {
   const url = `${urlPrefixArticle}?topic_id=${topicId}&page_num=${pageNumber}`
+
   return fetch(url)
     .then(response => response.json())
     .then(res => {
-      const newFetchedArticles = res.articles
+      if (res.code) {
+        return Promise.reject({ code: res.code, message: res.message })
+      }
+
+      const { articles } = res
       const newArticles = []
-      newFetchedArticles.forEach(item => {
+      articles.forEach(article => {
         newArticles.push(
           new Article({
-            id: item._id,
-            title: item.title,
-            desc: item.desc
+            id: article._id,
+            title: article.title,
+            desc: article.desc,
+            url: article.uri
           })
         )
       })

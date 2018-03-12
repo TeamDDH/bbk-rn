@@ -1,12 +1,15 @@
-import { persist, store } from '../store'
+import { store, cache } from '../store'
 import * as actions from '../store/actions'
 
+/**
+ * AppDidMount.
+ */
 export const appDidMount = function() {
   prepareAuthInfo()
 }
 
 const prepareAuthInfo = function() {
-  persist
+  cache
     .load({ key: 'authInfo' })
     .then(authInfo => {
       store.dispatch(actions.setUser(authInfo.user))

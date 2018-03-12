@@ -2,8 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { persist } from '../store'
-import LoginForm from '../components/LoginForm'
-import RegisterFrom from '../components/RegisterForm'
+import LoginForm from '../components/forms/LoginForm'
+import RegisterFrom from '../components/forms/RegisterForm'
 
 class Auth extends React.Component {
   constructor(props) {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: 120
   },
   footerText: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center'
   },
   footerLink: {

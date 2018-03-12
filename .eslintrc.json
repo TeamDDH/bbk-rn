@@ -19,6 +19,8 @@
     "no-return-assign": 1,
     "react/self-closing-comp": 1,
     "react/prop-types": 0,
+    "react/display-name": 0,
+    "react/no-string-refs": 0,
     "space-before-function-paren": 0
   },
   "globals": {

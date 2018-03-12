@@ -1,8 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import { persist } from '../store'
-import SettingList from '../components/SettingList'
+
+import { cache } from '../store'
+import SettingList from '../components/lists/SettingList'
 
 const sections = [
   {
@@ -41,7 +42,7 @@ const mapDispatchToProps = function(dispatch) {
   return {
     unAuth: () => {
       dispatch({ type: 'UN_AUTH' })
-      persist.remove({ key: 'authInfo' })
+      cache.remove({ key: 'authInfo' })
     }
   }
 }

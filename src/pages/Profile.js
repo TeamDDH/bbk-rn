@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+
 import { centeredContainer } from '../assets/styles/mixins'
 
 export default class Profile extends React.Component {

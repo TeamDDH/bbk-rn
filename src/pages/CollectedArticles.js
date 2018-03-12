@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import ArticleList from '../components/ArticleList'
+import ArticleList from '../components/lists/ArticleList'
 
 export default class CollectedArticles extends React.Component {
   static navigationOptions = {

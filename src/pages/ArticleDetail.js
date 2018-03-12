@@ -1,18 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
 
-/**
- * ArticlesDetail contains a WebView displaying the article and a commenting
- * box.
- *
- * @export
- * @class ArticleDetail
- * @extends {React.Component}
- */
+import ArticleDisplayer from '../components/ArticleDisplayer'
+
 export default class ArticleDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
-
     return {
       title: params ? params.articleTitle : '阅读文章'
     }
@@ -20,13 +12,12 @@ export default class ArticleDetail extends React.Component {
 
   constructor(props) {
     super(props)
-  }
-
-  componentDidMount() {
-    // TODO: load article and display it in web view.
+    const { params } = props.navigation.state
+    const articleUrl = params ? params.articleUrl : null
+    this.state = { articleUrl }
   }
 
   render() {
-    return <View />
+    return <ArticleDisplayer articleUrl={this.state.articleUrl} />
   }
 }

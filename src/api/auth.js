@@ -13,5 +13,10 @@ export const authUser = function(type, params) {
     body: JSON.stringify(params)
   })
     .then(response => response.json())
-    .then(res => (res.message ? Promise.reject(res.message) : res))
+    .then(
+      res =>
+        res.message
+          ? Promise.reject({ code: res.code, message: res.message })
+          : res
+    )
 }

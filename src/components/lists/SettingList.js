@@ -33,12 +33,10 @@ const AvatarCell = connect(state => ({
 }))(Avatar)
 
 class SettingListCell extends React.PureComponent {
-  _onPress = () => {
-    this.props.onPressItem(this.props.hook)
-  }
+  _onPress = () => this.props.onPressItem(this.props.hook)
 
   render() {
-    const { type, title, desc, hook } = this.props
+    const { type, title } = this.props
 
     switch (type) {
       case 'avatar':

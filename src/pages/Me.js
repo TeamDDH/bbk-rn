@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
-import SettingList from '../components/SettingList'
+
+import SettingList from '../components/lists/SettingList'
 
 const sections = [
   {

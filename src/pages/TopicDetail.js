@@ -1,17 +1,16 @@
 import React from 'react'
 import { View } from 'react-native'
 
+import ArticleList from '../components/lists/ArticleList'
 import { fetchArticlesInTopic } from '../api/articles'
+import { container } from '../assets/styles/mixins'
 import { find } from '../utils/array'
-
-import ArticleList from '../components/ArticleList'
 
 export default class TopicDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
-
     return {
-      title: params ? params.topicTitle : 'A Nested Details Screen'
+      title: params ? params.topicTitle : '主题详情'
     }
   }
 
@@ -36,7 +35,8 @@ export default class TopicDetail extends React.Component {
     if (target) {
       this.props.navigation.navigate('ArticleDetail', {
         articleId: id,
-        articleTitle: target.title
+        articleTitle: target.title,
+        articleUrl: target.url
       })
     }
   }
@@ -52,7 +52,7 @@ export default class TopicDetail extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={container}>
         <ArticleList
           data={this.state.articles}
           selectArticle={this._selectArticle}
