@@ -1,9 +1,6 @@
-import { store, cache } from '../store'
-import * as actions from '../store/actions'
+import { store, cache } from './store'
+import * as actions from './store/actions'
 
-/**
- * AppDidMount.
- */
 export const appDidMount = function() {
   prepareAuthInfo()
 }

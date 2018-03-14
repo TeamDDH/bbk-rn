@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { persist } from '../store'
+import { cache } from '../store'
 import LoginForm from '../components/forms/LoginForm'
 import RegisterFrom from '../components/forms/RegisterForm'
 
@@ -22,7 +22,7 @@ class Auth extends React.Component {
     this.props.setToken(token)
     this.props.navigation.goBack(null)
 
-    persist.save({
+    cache.save({
       key: 'authInfo',
       data: {
         user,

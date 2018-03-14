@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { Provider } from 'react-redux'
 
 import { store } from './src/store'
-import { appDidMount } from './src/utils/lifecycle'
+import { appDidMount } from './src/lifecycle'
 
 import HomeView from './src/pages/Home'
 import WatchView from './src/pages/Watch'

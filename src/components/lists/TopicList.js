@@ -9,6 +9,8 @@ import {
   ActivityIndicator
 } from 'react-native'
 
+import { dateFormmater } from '../../assets/js/datetime'
+
 import {
   topicCell,
   container,
@@ -28,9 +30,7 @@ const TopicCell = ({ onPressItem, desc, title, id, timeUpdated }) => (
         <Text style={cellTitleText}>{title}</Text>
         {desc ? <Text style={cellDescText}>{desc}</Text> : null}
         <View style={cellTimeWrapper}>
-          <Text style={cellTimeText}>
-            {new Date(timeUpdated).toLocaleString()}
-          </Text>
+          <Text style={cellTimeText}>{dateFormmater(timeUpdated)}</Text>
         </View>
       </View>
     </TouchableOpacity>

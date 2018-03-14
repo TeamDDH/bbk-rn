@@ -18,8 +18,9 @@ export const fetchArticlesInTopic = function(topicId, pageNumber) {
           new Article({
             id: article._id,
             title: article.title,
-            desc: article.desc,
-            url: article.uri
+            content: article.content,
+            url: article.uri,
+            timeUpdated: article.time_updated
           })
         )
       })

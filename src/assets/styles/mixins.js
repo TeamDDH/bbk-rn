@@ -56,16 +56,18 @@ export const topicCell = {
   paddingHorizontal: 20
 }
 export const cellTitleText = {
-  fontSize: 18
+  fontSize: 16,
+  marginBottom: 4
 }
 export const cellDescText = {
   fontSize: 14,
-  color: VARS.secondaryTextColor
+  color: VARS.secondaryTextColor,
+  maxHeight: 50
 }
 export const cellTimeWrapper = {
   position: 'absolute',
   right: 0,
-  top: 20,
+  top: 16,
   height: 20,
   width: 180
 }

@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import ArticleList from '../components/lists/ArticleList'
 import { fetchArticlesInTopic } from '../api/articles'
 import { container } from '../assets/styles/mixins'
-import { find } from '../utils/array'
+import { find } from '../assets/js/array'
 
 export default class TopicDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {

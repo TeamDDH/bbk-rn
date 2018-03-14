@@ -1,18 +1,26 @@
 import React from 'react'
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 
+import { dateFormmater } from '../../assets/js/datetime'
+
 import {
   container,
   cellContainer,
   articleCell,
-  cellTitleText
+  cellTitleText,
+  cellDescText,
+  cellTimeWrapper,
+  cellTimeText
 } from '../../assets/styles/mixins'
 
-const ArticleItem = ({ onPressItem, id, title, desc }) => (
+const ArticleItem = ({ onPressItem, id, title, desc, timeUpdated }) => (
   <TouchableOpacity onPress={() => onPressItem(id)} style={articleCell}>
     <View style={cellContainer}>
       <Text style={cellTitleText}>{title}</Text>
-      <Text>{desc}</Text>
+      <Text style={cellDescText}>{desc}</Text>
+      <View style={cellTimeWrapper}>
+        <Text style={cellTimeText}>{dateFormmater(timeUpdated)}</Text>
+      </View>
     </View>
   </TouchableOpacity>
 )
@@ -26,7 +34,7 @@ export default class ArticleList extends React.Component {
       onPressItem={this._onPressItem}
       id={item.id}
       title={item.title}
-      desc={item.desc}
+      desc={item.content}
     />
   )
 

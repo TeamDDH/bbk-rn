@@ -5,7 +5,7 @@ import Toast from 'react-native-easy-toast'
 
 import TopicList from '../components/lists/TopicList'
 import { fetchNewTopicsInPage } from '../api/topics'
-import { find } from '../utils/array'
+import { find } from '../assets/js/array'
 import { container } from '../assets/styles/mixins'
 
 export default class Main extends React.Component<{}> {
@@ -19,12 +19,10 @@ export default class Main extends React.Component<{}> {
       topics: [],
       currentPage: 1,
       refreshing: true,
-      fetching: false, // Fetch data lock
+      fetching: false,
       hasNext: true
     }
   }
-
-  // MARK: Delegates
 
   _selectTopic = id => {
     const target = find('id', this.state.topics, id)
@@ -58,8 +56,6 @@ export default class Main extends React.Component<{}> {
     )
   }
 
-  // MARK: Data requiring methods.
-
   _onRequireMore = () => {
     const currentPage = this.state.currentPage
     this._fetchTopicsInPage(currentPage).then(() => {
@@ -81,8 +77,14 @@ export default class Main extends React.Component<{}> {
 
     return fetchNewTopicsInPage(pageNumber)
       .then(({ newTopics, hasNext }) => {
+        if (newTopics && newTopics.length === 0) {
+          this.refs.toast.show('没有更多的主题了', 4000)
+        } else {
+          this.setState({
+            topics: this.state.topics.concat(newTopics)
+          })
+        }
         this.setState({
-          topics: this.state.topics.concat(newTopics),
           hasNext,
           fetching: false,
           refreshing: false
